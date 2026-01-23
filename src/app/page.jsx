@@ -1,6 +1,8 @@
 "use client";
-
+import { InputArea } from "./components/InputArea";
+import { ContinueButtons } from "./components/ContinueButtons";
 import { useState } from "react";
+
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -12,68 +14,66 @@ export default function Home() {
   const [error, setError] = useState(initialValues);
 
   const handleChange = (event) => {
+    console.log(event.target.name);
+
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  console.log(formData);
+
   const onSubmit = () => {
+    const newErrors = {};
     if (formData.firstName === "") {
-      setError({
-        ...error,
-        firstName: "hooson bj bolohgui",
-      });
+      newErrors.firstName = "Must be Filled";
     }
+    if (formData.lastName === "") {
+      newErrors.lastName = "Must be Filled";
+    }
+    if (formData.userName === "") {
+      newErrors.userName = "Must be Filled";
+    }
+
+    setError(newErrors);
+
+    console.log(formData);
+
+    // setError(isValid);
   };
 
   return (
-    <div className="flex flex-col bg-white h-[655px] w-[480px] rounded-[8px] items-start">
-      <div className="ml-[32px] mt-[32px]">
-        <div className="mb-7">
-          <img src="/logo.svg" alt="" />
-          <h1 className="text-[#202124] text-[26px]">Join Us! 😎</h1>
-          <p className="text-[#8E8E8E] text-[18px]">
-            Please provide all current information accurately.
-          </p>
-        </div>
-        <div className="mt-3 mb-3">
-          <p className="font-semibold text-[14px] text-[#334155]">First Name</p>
-          <input
-            className="border rounded-[8px] w-[416px] h-[44px] mt-2 pl-3 placeholder:text-[#8B8E95] text-black "
-            type="text"
-            placeholder="Placeholder"
-            value={formData.firstName}
-            name="firstName"
-            onChange={handleChange}
+    <div className="flex items-center justify-center mt-10">
+      <div className="flex flex-col bg-white h-[655px] w-[480px] rounded-[8px] items-start">
+        <div className="ml-[32px] mt-[32px]">
+          <div className="mb-7">
+            <img src="/logo.svg" alt="" />
+            <h1 className="text-[#202124] text-[26px]">Join Us! 😎</h1>
+            <p className="text-[#8E8E8E] text-[18px]">
+              Please provide all current information accurately.
+            </p>
+          </div>
+          <InputArea
+            handleChange={handleChange}
+            formData={formData.firstName}
+            error={error.firstName}
+            label="First Name"
+            initialValues="firstName"
           />
-          <p className="text-red-500">{error.firstName}</p>
-        </div>
-        <div className="mt-3 mb-3">
-          <p className="font-semibold text-[14px] text-[#334155]">Last Name</p>
-          <input
-            className="border rounded-[8px] w-[416px] h-[44px] mt-2 pl-3 placeholder:text-[#8B8E95] text-black"
-            type="text"
-            placeholder="Placeholder"
-            value={formData.lastName}
-            name="lastName"
-            onChange={handleChange}
+          <InputArea
+            handleChange={handleChange}
+            formData={formData.lastName}
+            error={error.lastName}
+            label="Last Name"
+            initialValues="lastName"
           />
-        </div>
-        <div className="mt-3 mb-3">
-          <p className="font-semibold text-[14px] text-[#334155]">Username</p>
-          <input
-            className="border rounded-[8px] w-[416px] h-[44px] mt-2 pl-3 placeholder:text-[#8B8E95] text-black"
-            type="text"
-            placeholder="Placeholder"
-            value={formData.userName}
-            name="userName"
-            onChange={handleChange}
+          <InputArea
+            handleChange={handleChange}
+            formData={formData.userName}
+            error={error.userName}
+            label="User Name"
+            initialValues={"userName"}
           />
+          <ContinueButtons onSubmit={onSubmit} />
         </div>
-        <button
-          className="bg-[#121316] text-white w-[416px] h-[44px] rounded-[8px]"
-          onClick={onSubmit}
-        >
-          Continue
-        </button>
       </div>
     </div>
   );
