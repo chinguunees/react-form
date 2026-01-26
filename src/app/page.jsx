@@ -37,6 +37,7 @@ export default function Home() {
 
     setError(newErrors);
   };
+  console.log(formData);
 
   return (
     <div className="flex items-center justify-center mt-10">
