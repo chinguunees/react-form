@@ -4,7 +4,6 @@ export const InputArea = ({
   error,
   label,
   initialValues,
-  onSubmit,
 }) => {
   return (
     <div className="mt-3 mb-3">
@@ -13,7 +12,7 @@ export const InputArea = ({
       </p>
 
       <input
-        className={`border  rounded-[8px] w-[416px] h-[44px] mt-2 pl-3 placeholder:text-[#8B8E95] ${error === onSubmit ? "border-black" : "border-red-500"} text-black `}
+        className={`border  rounded-[8px] w-[416px] h-[44px] mt-2 pl-3 placeholder:text-[#8B8E95] ${error ? "border-red-500" : ""} text-black `}
         type="text"
         placeholder="Placeholder"
         value={formData}
