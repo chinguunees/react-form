@@ -1,14 +1,7 @@
 "use client";
 import { InputArea } from "./InputArea";
 
-export const StepOne = ({
-  handleChange,
-  formData,
-  errors,
-  error,
-  label,
-  initialValues,
-}) => {
+export const StepOne = ({ formData, handleChange, error }) => {
   return (
     <div>
       <InputArea

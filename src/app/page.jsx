@@ -13,17 +13,9 @@ const initialValues = {
   userName: "",
 };
 
-// const components = [StepOne, StepTwo, StepThree];
-// const Stepper = components[index];
-
 export default function Home() {
   const [formData, setFormData] = useState(initialValues);
   const [error, setError] = useState(initialValues);
-  const [index, setIndex] = useState(0);
-
-  const continueButton = () => {
-    setIndex((prev) => prev + 1);
-  };
 
   const handleChange = (event) => {
     console.log(event.target.name);
@@ -31,7 +23,6 @@ export default function Home() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  console.log(formData);
   const onSubmit = () => {
     const newErrors = {};
     if (formData.firstName === "") {
@@ -43,10 +34,8 @@ export default function Home() {
     if (formData.userName === "") {
       newErrors.userName = "Нэвтрэх нэрээ оруулна уу.";
     }
-    setIndex((prev) => prev + 1);
-    setError(newErrors);
 
-    console.log(formData);
+    setError(newErrors);
   };
 
   return (
@@ -75,20 +64,3 @@ export default function Home() {
     </div>
   );
 }
-
-// const Home = () => {
-//   const components = [StepOne, StepTwo, StepThree];
-
-// const [index, setIndex] = useState(0);
-// const Stepper = components[index];
-// const continueButton = () => {
-//   setIndex((prev) => prev + 1);
-// };
-// return (
-//   <div className="text-black">
-//     <Stepper />
-//     <button onClick={continueButton}>Add</button>
-//   </div>
-// );
-
-// export default Home;
