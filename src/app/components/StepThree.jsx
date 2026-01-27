@@ -16,8 +16,8 @@ export const StepThree = ({
 }) => {
   const onValidation2 = () => {
     const newErrors = {};
-    if (formData.date === "") {
-      newErrors.date = "Зөв хугацаа оруулна уу.";
+    if (formData.eMail === "") {
+      newErrors.eMail = "Зөв хугацаа оруулна уу.";
     }
 
     const isValid = Object.keys(newErrors).length === 0;
