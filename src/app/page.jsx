@@ -4,62 +4,93 @@ import { ContinueButtons } from "./components/ContinueButtons";
 
 import { useState } from "react";
 import { StepOne } from "./components/StepOne";
-// import { StepThree } from "./components/StepThree";
+import { StepThree } from "./components/StepThree";
 import { StepTwo } from "./components/StepTwo";
 
 const initialValues = {
   firstName: "",
   lastName: "",
   userName: "",
+  eMail: "",
+  phoneNumber: "",
+  passWord: "",
+  confirmPassword: "",
+  date: "",
 };
 
 export default function Home() {
   const [formData, setFormData] = useState(initialValues);
   const [error, setError] = useState(initialValues);
+  const [step, setStep] = useState(1);
 
   const handleChange = (event) => {
-    console.log(event.target.name);
-
     setFormData({ ...formData, [event.target.name]: event.target.value });
+    console.log(formData);
   };
 
-  const onSubmit = () => {
-    const newErrors = {};
-    if (formData.firstName === "") {
-      newErrors.firstName = "Нэрээ оруулна уу.";
-    }
-    if (formData.lastName === "") {
-      newErrors.lastName = "Овогоо оруулна уу.";
-    }
-    if (formData.userName === "") {
-      newErrors.userName = "Нэвтрэх нэрээ оруулна уу.";
-    }
-
-    setError(newErrors);
+  const updateError = (newError) => {
+    setError({ ...error, ...newError });
   };
-  console.log(formData);
+
+  const nextStep = () => {
+    setStep(step + 1);
+  };
+
+  const prevStep = () => {
+    setStep(step - 1);
+  };
 
   return (
     <div className="flex items-center justify-center mt-10">
-      <div className="flex flex-col bg-white h-[655px] w-[480px] rounded-[8px] items-start">
+      <div className="flex flex-col bg-white h-100% w-[480px] rounded-[8px] items-start pb-[32px]">
         <div className="ml-[32px] mt-[32px]">
-          <div className="mb-7">
-            <img src="/logo.svg" alt="" />
-            <h1 className="text-[#202124] text-[26px]">Join Us! 😎</h1>
-            <p className="text-[#8E8E8E] text-[18px]">
-              Please provide all current information accurately.
-            </p>
-          </div>
-          <StepOne
-            handleChange={handleChange}
-            formData={formData}
-            error={error}
-            label="First Name"
-            initialValues="firstName"
-            InputArea={InputArea}
-          />
+          {step === 1 && (
+            <StepOne
+              handleChange={handleChange}
+              updateError={updateError}
+              formData={formData}
+              error={error}
+              label="First Name"
+              initialValues="firstName"
+              InputArea={InputArea}
+              nextStep={nextStep}
+            />
+          )}
+          {step === 2 && (
+            <StepTwo
+              handleChange={handleChange}
+              updateError={updateError}
+              formData={formData}
+              error={error}
+              label="E-Mail"
+              InputArea={InputArea}
+              nextStep={nextStep}
+              prevStep={prevStep}
+            />
+          )}
+          {step === 3 && (
+            <StepThree
+              handleChange={handleChange}
+              updateError={updateError}
+              formData={formData}
+              error={error}
+              label="Date"
+              InputArea={InputArea}
+              nextStep={nextStep}
+              prevStep={prevStep}
+            />
+          )}
+          {step === 4 && (
+            <div>
+              <img src="/logo.svg" alt="" />
+              <h1 className="text-[#202124] text-[26px]">You're all set 🔥</h1>
+              <p className="text-[#8E8E8E] text-[18px]">
+                We have received your submission. Thank you!
+              </p>
+            </div>
+          )}
 
-          <ContinueButtons onSubmit={onSubmit} />
+          {/* <ContinueButtons onSubmit={onSubmit} /> */}
         </div>
       </div>
     </div>
