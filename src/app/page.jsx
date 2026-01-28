@@ -42,8 +42,8 @@ export default function Home() {
   };
 
   return (
-    <div className="flex items-center justify-center mt-10">
-      <div className="flex flex-col bg-white h-100% w-[480px] rounded-[8px] items-start pb-[32px] shadow-[0px_4px_6px_0px_rgba(0,_0,_0,_0.1)]">
+    <div className="flex items-center justify-center mt-10 dark:bg-[#242424]">
+      <div className="flex flex-col bg-white h-100% w-[480px] rounded-[8px] items-start pb-[32px] shadow-[0px_4px_6px_0px_rgba(0,_0,_0,_0.1)] dark:bg-[#373737] ">
         <div className="ml-[32px] mt-[32px]">
           {step === 1 && (
             <Transition>

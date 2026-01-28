@@ -7,7 +7,6 @@ export const BackButtons = ({ prevStep }) => {
       >
         Back
       </button>
-      ;
     </div>
   );
 };

@@ -45,8 +45,10 @@ export const StepTwo = ({
     <div>
       <div className="mb-7">
         <img src="/logo.svg" alt="" />
-        <h1 className="text-[#202124] text-[26px]">Join Us! 😎</h1>
-        <p className="text-[#8E8E8E] text-[18px]">
+        <h1 className="text-[#202124] text-[26px] dark:text-[#f1faee]  ">
+          Join Us! 😎
+        </h1>
+        <p className="text-[#8E8E8E] text-[18px] dark:text-white ">
           Please provide all current information accurately.
         </p>
       </div>
@@ -78,7 +80,7 @@ export const StepTwo = ({
         label="Confirm Password"
         initialValues={"confirmPassword"}
       />
-      <div className="flex pt-[40px]">
+      <div className="flex pt-[40px] justify-between">
         <BackButtons prevStep={prevStep} />
         <ContinueButtons onSubmit={onSubmit} />
       </div>

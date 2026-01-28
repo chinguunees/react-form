@@ -1,8 +1,8 @@
 export const InputFile = ({ handleChange, error, label, initialValues }) => {
   return (
     <div className="mt-3 mb-3">
-      <p className="font-semibold text-[14px] text-[#334155]">
-        {label} <label className="text-red-500">*</label>
+      <p className="font-semibold text-[14px] text-[#334155] dark:text-white">
+        {label} <label className="text-red-500 dark:text-[#f46036]">*</label>
       </p>
 
       <input
@@ -13,7 +13,7 @@ export const InputFile = ({ handleChange, error, label, initialValues }) => {
         name={initialValues}
         onChange={handleChange}
       />
-      <p className="text-red-500">{error}</p>
+      <p className="text-red-500 dark:text-[#f46036]">{error}</p>
     </div>
   );
 };
