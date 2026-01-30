@@ -8,11 +8,16 @@ import { BackButtons } from "./BackButton";
 
 export const StepThree = ({
   handleChange,
+  uploadAgain,
   formData,
   error,
   updateError,
   nextStep,
   prevStep,
+  fileUploadRef,
+  uploadFile,
+  image,
+  cancelImage,
 }) => {
   const onValidation2 = () => {
     const newErrors = {};
@@ -34,6 +39,7 @@ export const StepThree = ({
 
     updateError(newErrors);
   };
+
   return (
     <div>
       <div className="mb-7">
@@ -53,12 +59,17 @@ export const StepThree = ({
         initialValues="eMail"
       />
       <InputFile
-        handleChange={handleChange}
-        formData={formData.date}
+        formData={formData.file}
+        uploadAgain={uploadAgain}
         error={error.eMail}
+        fileUploadRef={fileUploadRef}
+        uploadFile={uploadFile}
         label="Photo"
-        initialValues="eMail"
+        initialValues="image"
+        image={image}
+        cancelImage={cancelImage}
       />
+
       <div className="flex pt-[40px] justify-between ">
         <BackButtons prevStep={prevStep} />
         <ContinueButtons onSubmit={onSubmit} />

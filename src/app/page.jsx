@@ -2,12 +2,13 @@
 import { InputArea } from "./components/InputArea";
 import { ContinueButtons } from "./components/ContinueButtons";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { StepOne } from "./components/StepOne";
 import { StepThree } from "./components/StepThree";
 import { StepTwo } from "./components/StepTwo";
 import { motion } from "framer-motion";
 import { Transition } from "./components/Transition";
+import { StepFour } from "./components/StepFour";
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -17,16 +18,26 @@ const initialValues = {
   passWord: "",
   confirmPassword: "",
   date: "",
+  image: "",
 };
 
 export default function Home() {
   const [formData, setFormData] = useState(initialValues);
   const [error, setError] = useState(initialValues);
   const [step, setStep] = useState(1);
+  const [image, setImage] = useState(null);
+  const fileUploadRef = useRef();
+
+  const uploadFile = () => {
+    setImage(fileUploadRef.current.files[0]);
+  };
+
+  const uploadAgain = () => {
+    fileUploadRef.current.click();
+  };
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
-    console.log(formData);
   };
 
   const updateError = (newError) => {
@@ -41,8 +52,12 @@ export default function Home() {
     setStep(step - 1);
   };
 
+  const cancelImage = () => {
+    setImage(null);
+  };
+
   return (
-    <div className="flex items-center justify-center mt-10 dark:bg-[#242424]">
+    <div className="flex items-center justify-center mt-50 dark:bg-[#242424]">
       <div className="flex flex-col bg-white h-100% w-[480px] rounded-[8px] items-start pb-[32px] shadow-[0px_4px_6px_0px_rgba(0,_0,_0,_0.1)] dark:bg-[#373737] ">
         <div className="ml-[32px] mt-[32px]">
           {step === 1 && (
@@ -78,26 +93,23 @@ export default function Home() {
               <StepThree
                 handleChange={handleChange}
                 updateError={updateError}
+                uploadAgain={uploadAgain}
                 formData={formData}
                 error={error}
                 label="Date"
                 InputArea={InputArea}
                 nextStep={nextStep}
                 prevStep={prevStep}
+                uploadFile={uploadFile}
+                image={image}
+                fileUploadRef={fileUploadRef}
+                cancelImage={cancelImage}
               />
             </Transition>
           )}
           {step === 4 && (
             <Transition>
-              <div>
-                <img src="/logo.svg" alt="" />
-                <h1 className="text-[#202124] text-[26px]">
-                  You're all set 🔥
-                </h1>
-                <p className="text-[#8E8E8E] text-[18px]">
-                  We have received your submission. Thank you!
-                </p>
-              </div>
+              <StepFour formData={formData} />
             </Transition>
           )}
 
